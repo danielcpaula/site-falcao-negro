@@ -163,11 +163,22 @@ import Layout from '../layouts/Layout.astro';
         <p class="section-eyebrow">Sua jornada</p>
         <h2 class="section-title">Classes <span>Progressivas</span></h2>
       </div>
-      <div class="classes-track">
-        {['Amigo', 'Companheiro', 'Pesquisador', 'Pioneiro', 'Excursionista', 'Viajante', 'Guia'].map((c, i) => (
-          <div class="classe animate-on-scroll" style={`transition-delay: ${i * 0.08}s`}>
-            <div class="classe-num">{i + 1}</div>
-            <span>{c}</span>
+      <div class="classes-grid">
+        {[
+          { num: 1, regular: 'Amigo', avancada: 'Amigo da Natureza', idade: '10 anos', cor: '#4A90D9' },
+          { num: 2, regular: 'Companheiro', avancada: 'Companheiro de Excursionismo', idade: '11 anos', cor: '#E05252' },
+          { num: 3, regular: 'Pesquisador', avancada: 'Pesquisador de Campo e Bosque', idade: '12 anos', cor: '#5BAD6F' },
+          { num: 4, regular: 'Pioneiro', avancada: 'Pioneiro de Novas Fronteiras', idade: '13 anos', cor: '#999999' },
+          { num: 5, regular: 'Excursionista', avancada: 'Excursionista na Mata', idade: '14 anos', cor: '#9B6FD9' },
+          { num: 6, regular: 'Guia', avancada: 'Guia de Exploração', idade: '15 anos', cor: '#D4A820' },
+        ].map((c, i) => (
+          <div class="classe-card animate-on-scroll" style={`transition-delay: ${i * 0.08}s; --classe-cor: ${c.cor}`}>
+            <div class="classe-num">{c.num}</div>
+            <div class="classe-info">
+              <span class="classe-nome">{c.regular}</span>
+              <span class="classe-avancada">{c.avancada}</span>
+              <span class="classe-idade">{c.idade}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -645,57 +656,63 @@ import Layout from '../layouts/Layout.astro';
     padding: 6rem 0;
     background: var(--black);
   }
-  .classes-track {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0;
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
     margin-top: 1rem;
-    position: relative;
   }
-  .classes-track::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    right: 10%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--orange), transparent);
-    transform: translateY(-50%);
-  }
-  .classe {
+  .classe-card {
+    background: var(--dark2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-left: 4px solid var(--classe-cor, var(--orange));
+    border-radius: 10px;
+    padding: 1.5rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0 1.25rem;
-    position: relative;
-    z-index: 1;
+    gap: 1.25rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .classe-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
   .classe-num {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: var(--dark2);
-    border: 2px solid var(--orange);
+    background: var(--classe-cor, var(--orange));
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: var(--font-title);
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: var(--orange);
-    transition: background 0.3s;
+    color: var(--black);
+    flex-shrink: 0;
   }
-  .classe:hover .classe-num { background: var(--orange); color: var(--black); }
-  .classe span {
+  .classe-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .classe-nome {
     font-family: var(--font-title);
-    font-size: 0.8rem;
-    letter-spacing: 1px;
+    font-size: 1.05rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--gray);
-    white-space: nowrap;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  .classe-avancada {
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+  .classe-idade {
+    font-size: 0.78rem;
+    color: var(--classe-cor, var(--orange));
+    font-family: var(--font-title);
+    letter-spacing: 1px;
   }
 
   /* ── VERSÍCULO ── */
@@ -859,7 +876,7 @@ import Layout from '../layouts/Layout.astro';
     .atividades-grid { grid-template-columns: 1fr 1fr; }
     .contato-grid { grid-template-columns: 1fr; }
     .versiculo-card { flex-direction: column; text-align: center; }
-    .classes-track::before { display: none; }
+    .classes-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 600px) {
     .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 1.5rem; gap: 1rem; }
