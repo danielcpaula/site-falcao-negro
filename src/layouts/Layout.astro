@@ -1,0 +1,185 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Clube de Desbravadores Falcão Negro – Cascavel, PR',
+  description = 'Clube de Desbravadores Falcão Negro de Cascavel, Paraná. Venha fazer parte desta família! Atividades, aventuras e valores cristãos para crianças e adolescentes.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="desbravadores, cascavel, paraná, clube adventista, falcão negro, jovens cristãos, atividades infantis cascavel" />
+    <meta name="author" content="Clube de Desbravadores Falcão Negro" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="/images/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="canonical" href="https://falcaonegro.com.br/" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Clube de Desbravadores Falcão Negro",
+        "description": "Clube de Desbravadores Falcão Negro - Cascavel, Paraná",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cascavel",
+          "addressRegion": "PR",
+          "addressCountry": "BR"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+55-45-99998-1196",
+          "contactType": "customer support"
+        },
+        "sameAs": [
+          "https://www.instagram.com/dbv_falcaonegro"
+        ]
+      }
+    </script>
+
+    <style is:global>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --orange: #F97316;
+        --orange-dark: #C2571A;
+        --orange-light: #FBBF24;
+        --black: #0a0a0a;
+        --dark: #111111;
+        --dark2: #1a1a1a;
+        --dark3: #222222;
+        --gray: #888;
+        --white: #ffffff;
+        --font-title: 'Oswald', sans-serif;
+        --font-body: 'Open Sans', sans-serif;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background-color: var(--black);
+        color: var(--white);
+        font-family: var(--font-body);
+        overflow-x: hidden;
+      }
+
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: var(--dark); }
+      ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 3px; }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .section-title {
+        font-family: var(--font-title);
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--white);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title span {
+        color: var(--orange);
+      }
+
+      .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: var(--orange);
+        margin-top: 0.5rem;
+      }
+
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes fadeInLeft {
+        from { opacity: 0; transform: translateX(-60px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes fadeInRight {
+        from { opacity: 0; transform: translateX(60px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+
+      @keyframes pulse-orange {
+        0%, 100% { box-shadow: 0 0 20px rgba(249,115,22,0.4); }
+        50% { box-shadow: 0 0 40px rgba(249,115,22,0.8); }
+      }
+
+      @keyframes wingFlap {
+        0%, 100% { transform: scaleY(1) rotate(-2deg); }
+        50% { transform: scaleY(0.92) rotate(2deg); }
+      }
+
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Intersection Observer para animações de scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
