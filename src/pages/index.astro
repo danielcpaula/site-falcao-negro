@@ -7,7 +7,7 @@ import Layout from '../layouts/Layout.astro';
   <nav id="navbar">
     <div class="container nav-inner">
       <a href="#hero" class="nav-logo">
-        <img src="/images/logo-falcao.png" alt="Falcão Negro" height="50" />
+        <img src="/images/logo-falcao.png" alt="Falcão Negro" width="100" height="50" />
       </a>
       <button class="nav-toggle" aria-label="Menu" id="navToggle">
         <span></span><span></span><span></span>
@@ -41,7 +41,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
       <div class="hero-image">
-        <img src="/images/falcao-voo.png" alt="Falcão Negro em voo" class="falcon-flying" id="falconHero" />
+        <img src="/images/falcao-voo.png" alt="Falcão Negro em voo" class="falcon-flying" id="falconHero" width="580" height="580" fetchpriority="high" />
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -55,7 +55,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container">
       <div class="sobre-grid">
         <div class="sobre-image animate-on-scroll">
-          <img src="/images/logo-completo.png" alt="Logo Falcão Negro" class="sobre-logo" />
+          <img src="/images/logo-completo.png" alt="Logo Falcão Negro" class="sobre-logo" width="360" height="360" loading="lazy" />
         </div>
         <div class="sobre-text animate-on-scroll">
           <p class="section-eyebrow">Quem somos</p>
@@ -189,7 +189,7 @@ import Layout from '../layouts/Layout.astro';
   <section id="versiculo">
     <div class="container">
       <div class="versiculo-card animate-on-scroll">
-        <img src="/images/falcao-frente.png" alt="Falcão Negro" class="versiculo-falcon" />
+        <img src="/images/falcao-frente.png" alt="Falcão Negro" class="versiculo-falcon" width="180" height="180" loading="lazy" />
         <div class="versiculo-text">
           <p class="versiculo-ref">Isaías 40:31</p>
           <blockquote>"Mas os que esperam no SENHOR renovarão as suas forças; subirão com asas como águias; correrão e não se cansarão; caminharão e não se fatigarão."</blockquote>
@@ -239,7 +239,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <div class="contato-cta animate-on-scroll">
           <div class="cta-card">
-            <img src="/images/logo-fn.png" alt="FN" class="cta-logo" />
+            <img src="/images/logo-fn.png" alt="FN" class="cta-logo" width="120" height="120" loading="lazy" />
             <h3>Venha Fazer Parte!</h3>
             <p>O Clube Falcão Negro está aberto para crianças e adolescentes de 10 a 15 anos. Entre em contato e descubra como se inscrever.</p>
             <ul class="cta-list">
@@ -259,7 +259,7 @@ import Layout from '../layouts/Layout.astro';
   <footer>
     <div class="container footer-inner">
       <div class="footer-logo">
-        <img src="/images/logo-falcao.png" alt="Falcão Negro" height="60" />
+        <img src="/images/logo-falcao.png" alt="Falcão Negro" width="120" height="60" loading="lazy" />
         <p>Clube de Desbravadores<br><strong>Falcão Negro</strong></p>
       </div>
       <div class="footer-links">
