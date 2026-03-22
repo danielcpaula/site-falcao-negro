@@ -64,7 +64,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="cs-progress animate-in" style="animation-delay:.75s">
         <div class="progress-header">
           <span>Progresso do site</span>
-          <span class="progress-pct">75%</span>
+          <span class="progress-pct" id="progressPct">57%</span>
         </div>
         <div class="progress-track">
           <div class="progress-bar" id="progressBar"></div>
@@ -434,9 +434,20 @@ import Layout from '../layouts/Layout.astro';
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // Barra de progresso (anima ao carregar)
+  // Barra de progresso — cresce de 57% (22/mar) até 100% (05/abr)
   setTimeout(() => {
+    const startDate = new Date('2026-03-22T00:00:00').getTime();
+    const endDate   = new Date('2026-04-05T00:00:00').getTime();
+    const startPct  = 57;
+    const endPct    = 100;
+    const now       = Date.now();
+    const elapsed   = Math.max(0, now - startDate);
+    const total     = endDate - startDate;
+    const pct       = Math.min(endPct, Math.round(startPct + (endPct - startPct) * (elapsed / total)));
+
     const bar = document.getElementById('progressBar');
-    if (bar) bar.style.width = '75%';
+    const label = document.getElementById('progressPct');
+    if (bar) bar.style.width = pct + '%';
+    if (label) label.textContent = pct + '%';
   }, 600);
 </script>
