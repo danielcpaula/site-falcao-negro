@@ -16,6 +16,7 @@ import Layout from '../layouts/Layout.astro';
         <li><a href="#sobre">Sobre</a></li>
         <li><a href="#pilares">Pilares</a></li>
         <li><a href="#atividades">Atividades</a></li>
+        <li><a href="#galeria">Galeria</a></li>
         <li><a href="#contato">Contato</a></li>
         <li><a href="#contato" class="nav-cta">Quero Participar</a></li>
       </ul>
@@ -182,6 +183,39 @@ import Layout from '../layouts/Layout.astro';
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <p class="section-eyebrow">Nossa história em fotos</p>
+        <h2 class="section-title">Momentos <span>Inesquecíveis</span></h2>
+      </div>
+      <div class="galeria-grid">
+        {[
+          { icon: '🏕️', label: 'Acampamento', desc: 'Aventuras na natureza' },
+          { icon: '🥁', label: 'Banda', desc: 'Ritmo e disciplina' },
+          { icon: '🏅', label: 'Honras', desc: 'Conquistas e aprendizado' },
+          { icon: '🤝', label: 'Serviço', desc: 'Impacto na comunidade' },
+          { icon: '🏆', label: 'Campori', desc: 'União de desbravadores' },
+          { icon: '📖', label: 'Devocionais', desc: 'Fé em ação' },
+          { icon: '🌲', label: 'Trilhas', desc: 'Explorando a criação' },
+          { icon: '🎖️', label: 'Formatura', desc: 'Momento de celebração' },
+        ].map((item, i) => (
+          <div class={`galeria-card animate-on-scroll galeria-card--${i < 2 ? 'wide' : 'normal'}`} style={`transition-delay: ${i * 0.07}s`}>
+            <div class="galeria-placeholder">
+              <span class="galeria-icon">{item.icon}</span>
+              <div class="galeria-overlay">
+                <strong>{item.label}</strong>
+                <span>{item.desc}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="galeria-hint animate-on-scroll">📸 Em breve mais fotos das nossas atividades!</p>
     </div>
   </section>
 
@@ -715,6 +749,83 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 1px;
   }
 
+  /* ── GALERIA ── */
+  #galeria {
+    padding: 6rem 0;
+    background: var(--dark);
+  }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .galeria-card--wide {
+    grid-column: span 2;
+  }
+  .galeria-placeholder {
+    position: relative;
+    aspect-ratio: 4/3;
+    background: var(--dark2);
+    border: 1px dashed rgba(249,115,22,0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .galeria-card--wide .galeria-placeholder {
+    aspect-ratio: 16/7;
+  }
+  .galeria-placeholder:hover {
+    border-color: var(--orange);
+    transform: scale(1.02);
+  }
+  .galeria-icon {
+    font-size: 3rem;
+    opacity: 0.35;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .galeria-placeholder:hover .galeria-icon {
+    opacity: 0.15;
+    transform: scale(1.2);
+  }
+  .galeria-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .galeria-placeholder:hover .galeria-overlay { opacity: 1; }
+  .galeria-overlay strong {
+    font-family: var(--font-title);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+  }
+  .galeria-overlay span {
+    font-size: 0.8rem;
+    color: #ccc;
+    margin-top: 0.2rem;
+  }
+  .galeria-hint {
+    text-align: center;
+    margin-top: 1.75rem;
+    color: #666;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
   /* ── VERSÍCULO ── */
   #versiculo {
     padding: 4rem 0;
@@ -877,6 +988,8 @@ import Layout from '../layouts/Layout.astro';
     .contato-grid { grid-template-columns: 1fr; }
     .versiculo-card { flex-direction: column; text-align: center; }
     .classes-grid { grid-template-columns: 1fr 1fr; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; }
+    .galeria-card--wide { grid-column: span 2; }
   }
   @media (max-width: 600px) {
     .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: rgba(10,10,10,0.98); padding: 1.5rem; gap: 1rem; }
@@ -884,6 +997,9 @@ import Layout from '../layouts/Layout.astro';
     .nav-toggle { display: flex; }
     .atividades-grid { grid-template-columns: 1fr; }
     .sobre-stats { flex-direction: column; gap: 1rem; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; }
+    .galeria-card--wide { grid-column: span 1; }
+    .galeria-card--wide .galeria-placeholder { aspect-ratio: 4/3; }
     .footer-inner { flex-direction: column; text-align: center; }
     .footer-links { justify-content: center; }
   }
